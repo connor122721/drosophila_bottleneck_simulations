@@ -1,5 +1,5 @@
 # Create parameter files to test slimulations
-# Connor Murray 8.3.2022
+# Connor Murray 10.31.2022
 # module load goolf/7.1.0_3.1.4 R/4.0.3; module load gdal geos proj; R
 
 # Library
@@ -16,9 +16,6 @@ bottleneck = c(0) # Magnitude of bottleneck %
 nMin = unique(c(100,250,500,750,
                          seq(from=1000, to=10000, by=1000),
                          seq(from=10000, to=50000, by=1000)))
-
-#nMax = c(100,250,500,1000,1500,2000,3000,5000,10000,15000,20000,25000,50000,75000)
-#nMin = unique(c(nMax, 250, 1500, 2000, 3000, 15000, 25000))
 
 Rep = 50 # Number of VCFs to output (from unique simulation seeds)
 nSamp = 50 # Number of samples for output VCF
@@ -81,4 +78,13 @@ ggplot(dt1,
 write.csv(dt1 %>% dplyr::select(-c(run)), 
           quote=F, 
           row.names=F,
-          file="/scratch/csm6hg/bottleneck/model_paramList_fin4_missed")
+          file="/scratch/csm6hg/bottleneck/model_paramList_fin")
+
+# Show models being tested
+ggplot(dt, 
+       aes(x=as.integer(nMin), 
+           y=as.integer(nMax))) +
+  geom_tile(color="red") +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle=-40))
+

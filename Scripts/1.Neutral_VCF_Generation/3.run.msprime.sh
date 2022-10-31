@@ -11,7 +11,7 @@
 #SBATCH --account berglandlab_standard
 
 # Run using:
-# sbatch --array=0-5 run.msprime.sh
+# sbatch --array=0-2 3.run.msprime.sh
 
 # Modules to load
 module load anaconda/2020.11-py3.8
@@ -25,11 +25,11 @@ date
 wd="/project/berglandlab/connor/slim_bottleneck"
 
 # Population size array
-popList=( 1500000 2000000 3000000 5000000 7500000 10000000 )
-popListName=( Neutral_1.5m Neutral_2m Neutral_3m Neutral_5m Neutral_7.5m Neutral_10m  )
+popList=( 100000 500000 1000000 )
+popListName=( Neutral_l00k Neutral_500k Neutral_1m )
 
 # Run python script to generate Neutral VCF
-python ${wd}/3.run.msprime.py \
+python ${wd}/2.run.msprime.py \
 ${popList[${SLURM_ARRAY_TASK_ID}]} \
 ${popListName[${SLURM_ARRAY_TASK_ID}]}
 

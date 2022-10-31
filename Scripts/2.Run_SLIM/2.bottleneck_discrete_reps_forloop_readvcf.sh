@@ -10,11 +10,13 @@
 #SBATCH -p standard
 #SBATCH --account berglandlab_standard
 
+# RUN SLIM BASED ON
+
 # Working directory
 wd="/scratch/csm6hg/bottleneck"
 
 # Parameter file
-paramFile=${wd}/model_paramList_fin4_missed
+paramFile=${wd}/model_paramList_fin
 
 # Extract constants from parameter file
 slurmID=$( cat ${paramFile} | grep "^$SLURM_ARRAY_TASK_ID," | cut -d',' -f1 )
