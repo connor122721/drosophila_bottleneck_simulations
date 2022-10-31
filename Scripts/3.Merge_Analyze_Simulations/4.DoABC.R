@@ -17,22 +17,7 @@ library(ggforce)
 library(cowplot)
 
 ####
-root <- "/scratch/csm6hg/bottleneck/Parsed_sims"
-setwd(root)
-files <- system( paste("ls ", root, " | grep '.Rdata'  "), intern = T )
-joint.dat <- foreach(i=1:length(files), .combine = "rbind", .errorhandling = "pass") %do% {
-  message(paste(i, "/",length(files)))
-  tmp <- get(load( paste( files[i], sep = "" ) ))
-}
-
-#####
-#saveRDS("/project/berglandlab/connor/bottleneck/parsed.data.Rdata", object = joint.dat)
 joint.dat <- readRDS("/project/berglandlab/connor/bottleneck/parsed.data.Rdata")
-
-pp <- data.table(joint.dat %>% group_by(model) %>% 
-                   summarize(num.reps=table(model)))
-ran.models <- unique(pp[num.reps.N>=50]$model)
-#write.table(x = ran.models, file = "/scratch/csm6hg/bottleneck/ran.models", quote = F, row.names = F, col.names = F)
 
 # Restrict to analyses 
 restrict <- data.table(fread("../model_paramList_fin4") %>% 

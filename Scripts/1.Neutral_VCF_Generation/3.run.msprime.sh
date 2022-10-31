@@ -29,7 +29,7 @@ popList=( 1500000 2000000 3000000 5000000 7500000 10000000 )
 popListName=( Neutral_1.5m Neutral_2m Neutral_3m Neutral_5m Neutral_7.5m Neutral_10m  )
 
 # Run python script to generate Neutral VCF
-python ${wd}/run.msprime.py \
+python ${wd}/3.run.msprime.py \
 ${popList[${SLURM_ARRAY_TASK_ID}]} \
 ${popListName[${SLURM_ARRAY_TASK_ID}]}
 
