@@ -60,7 +60,7 @@ models <- data.table(nMax=as.numeric(tstrsplit(mean.sim$model, "_")[[1]]),
 
 # Statistics to use
 sstats <-  c(colnames(empir))
-#sstats <- sstats[-c(6:8,10,11,13)]
+sstats <- sstats[-c(7,8,10)]
 
 # Empirical stats
 empir <- empir %>% dplyr::select(sstats)
@@ -108,14 +108,6 @@ out <- data.table(pivot_wider(tmp.out, names_from = data, values_from = populati
          "Max"="Max.:",
          "Median"="Median:",
          "Min"="Min.:")
-
-# Show ABC Results for 10% threshold
-out %>% 
-  as.data.frame() %>%
-  filter(threshold %in% 
-           seq(from=0.09, 
-               to = 0.11, 
-               by = 0.01))
 
 # Scale simulation
 sim.stat.sc <- data.table(sim.stat %>% 
@@ -385,12 +377,21 @@ pdf("composite.af.pdf", width=10, height=8)
 af.plot
 dev.off()
 
-# Harmonic mean calculation
-a <- c(rep(16043.8, 15), rep(1084.6,2))
+# Show ABC Results for 10% threshold
+out %>% 
+  as.data.frame() %>%
+  filter(threshold %in% 
+           seq(from=0.09, 
+               to = 0.11, 
+               by = 0.01))
+
+# 10% threshold calculation
+nMax=16670.159
+nMin=936.2461
+
+# Harmonic mean
+a <- c(rep(nMax, 15), rep(nMin, 2))
 1/mean(1/a)
 
-a <- c(rep(10000, 15), rep(3000,2))
-1/mean(1/a)
-
-(16043.8-1084.4)/16043.8
-(10000-3000)/10000
+# Bottleneck
+((nMax-nMin)/nMax)*100
