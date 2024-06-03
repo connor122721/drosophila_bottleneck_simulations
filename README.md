@@ -1,31 +1,36 @@
-# Started by Connor S. Murray
-10/31/2022
+# *Drosophila melanogaster* Bottleneck Simulations
 
-Drosophila bottleneck simulations
+## Overview
+This project involves the simulation of genetic differentiation in a neutrally evolving population of *Drosophila* after consecutive winter bottlenecks. The goal is to study the effects of these bottlenecks on the genetic diversity of a wild-caught population in Charlotteville, Virginia, USA. The scripts and data in this repository is part of the earlier work published in this article: (https://academic.oup.com/genetics/article/226/2/iyad207/7459204).
 
-Genetic differentiation of a neutrally evolving population after consecutive winter bottlenecks.
+## Author
+Started by Connor S. Murray  
+Date: October 31, 2022
 
-## Scripts
-# 1) Generate the burn-in VCF
+## Workflow
 
-This will generate the VCF for a metapopulation to have a theta pi ~ 0.01 (wild Drosophila metapopulation genetic diversity).
+### 1. Generate the Burn-in VCF
+This step generates the VCF for a metapopulation to achieve a theta pi ~ 0.01, representing the genetic diversity of a wild *Drosophila* metapopulation.
 
-Uses msprime/python
+**Tools Used:**  
+- `msprime` (Python)
 
-# 2) Run the SLiM scripts and output statistics
+### 2. Run the SLiM Scripts and Output Statistics
+This step involves running SLiM scripts to independently replicate the simulated universe over 50 generations, including 2 overwintering bottleneck events.
 
-Independently replicates the simulated universe over 50 generations with 2 bottleneck events.
+**Tools Used:**  
+- `SLiM`
 
-Uses SLiM/R
+### 3. Merge Parsed Data
+This step collects data from each simulation run and concatenates it for the analysis step.
 
-# 3) Merge parsed data
+**Tools Used:**  
+- `bash`
+- `python`
+- `R`
 
-Collect data from each simulation run and concatenates it for analysis step.
+### 4. Analyze, Perform ABC, and Plot Data
+This step involves performing Approximate Bayesian Computation (ABC) and plotting the results.
 
-Uses bash/R
-
-# 4) Analyze, ABC, and plot data
-
-Approximate bayesian computation (ABC) and plotting of results.
-
-Uses R
+**Tools Used:**  
+- `R`
